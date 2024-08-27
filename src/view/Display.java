@@ -7,12 +7,14 @@ public class Display {
 
 
     public void menuPrincipal(){
-        System.out.println("1 - Cadastrar Livro");
-        System.out.println("2 - Cadastrar Usuario");
-        System.out.println("3 - Emprestimo");
-        System.out.println("4 - Devolucao");
-        System.out.println("5 - Reserva");
-        System.out.println("6 - Sair");
+        System.out.println("Empréstimo: emp cod_usuario cod_livro");
+        System.out.println("Devolução: dev cod_usuario cod_livro");
+        System.out.println("Reservar: res cod_usuario cod_livro");
+        System.out.println("Observar: obs cod_usuario cod_livro");
+        System.out.println("Consultar: liv cod_livro");
+        System.out.println("Notificações: nth cod_usuario");
+        System.out.println("Historico: usu cod_usuario");
+        System.out.println("Sair: sai");
     }
 
     public void exibirLivro(Livro livro){
@@ -28,6 +30,8 @@ public class Display {
 
     public void exibirEmprestimoSucesso(Usuario usuario , Livro livro){
         System.out.println("Emprestimo realizado com sucesso");
+        System.out.println("Usuário: " + usuario.getNome());
+        System.out.println("Livro: " + livro.getTitulo());
     }
 
     public void exibirEmprestimoErro(Usuario usuario , Livro livro){

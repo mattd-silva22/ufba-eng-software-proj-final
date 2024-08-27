@@ -16,7 +16,6 @@ public class Livro {
         this.autores = autores;
         this.edicao = edicao;
         this.anoPublicacao = anoPublicacao;
-        this.codigoExemplar = codigoExemplar;
         this.codigo = codigo;
     }
 

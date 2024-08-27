@@ -2,18 +2,19 @@ package src.model;
 import java.util.Date;
 
 public class Emprestimo {
-    private Livro livro;
+    private Exemplar exemplar;
     private Usuario usuario;
     private Date dataEmprestimo;
 
 
-    public Emprestimo(Livro livro, Usuario usuario) {
-        this.livro = livro;
+    public Emprestimo(Exemplar exemplar, Usuario usuario) {
+        this.exemplar = exemplar;
         this.usuario = usuario;
+        this.dataEmprestimo = new Date();
     }
 
-    public Livro getLivro() {
-        return livro;
+    public Exemplar getExemplar() {
+        return exemplar;
     }
 
     public Usuario getUsuario() {

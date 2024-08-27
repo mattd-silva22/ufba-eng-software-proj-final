@@ -3,6 +3,7 @@ import java.util.Scanner;
 import src.controller.BibliotecaController;
 import src.controller.EmprestimoController;
 import src.model.Emprestimo;
+import src.model.Exemplar;
 import src.model.Livro;
 import src.model.Usuario;
 import view.Display;
@@ -29,6 +30,12 @@ public class Sistema {
                 break;
             case "res": //reservar
                 reservarLivro(Integer.parseInt(partes[1]), Integer.parseInt(partes[2]));
+                break;
+            case "dev": //devolver
+                break;
+            case "obs": //observar
+                break;
+            case "liv": //consultar
                 break;
             case "sair":
                 System.exit(0);
@@ -61,9 +68,22 @@ public class Sistema {
             return;
         }
 
-        Emprestimo emprestimo = new Emprestimo(livro, usuario);
+        if(!bibliotecaController.temExemplarDisponivel(codLivro)){
+            display.exibirMensagem("Não há exemplares disponíveis para empréstimo");
+            return;
+        }
+
+        Exemplar exemplar = bibliotecaController.getExemplarDisponivel(livro);
+
+        if(exemplar == null){
+            display.exibirMensagem("Exemplar não encontrado");
+            return;
+        }
+
+        Emprestimo emprestimo = new Emprestimo(exemplar, usuario);
         emprestimoController.adicionarEmprestimo(emprestimo);
         display.exibirMensagem("Empréstimo realizado com sucesso");
+        display.exibirEmprestimoSucesso(usuario, livro);
     }
 
     private static void reservarLivro(int codUsuario, int codLivro){

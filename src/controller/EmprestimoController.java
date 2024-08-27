@@ -28,7 +28,7 @@ public class EmprestimoController {
    public boolean temEmprestimoAtivoParaLivro(int codUsuario, int codLivro){
 
        for (Emprestimo emprestimo : emprestimos) {
-           if (emprestimo.getUsuario().getCodigo() == codUsuario && emprestimo.getLivro().getCodigo() == codLivro) {
+           if (emprestimo.getUsuario().getCodigo() == codUsuario && emprestimo.getExemplar().getLivro().getCodigo() == codLivro) {
                return true;
            }
 
@@ -62,14 +62,19 @@ public class EmprestimoController {
    }
 
    public void adicionarEmprestimo(Emprestimo emprestimo){
-       if(this.temReserva(emprestimo.getLivro(), emprestimo.getUsuario())){
-              this.encerrarReserva(emprestimo.getLivro(), emprestimo.getUsuario());
+       if(this.temReserva(emprestimo.getExemplar().getLivro(), emprestimo.getUsuario())){
+              this.encerrarReserva(emprestimo.getExemplar().getLivro(), emprestimo.getUsuario());
        }
        emprestimos.add(emprestimo);
    }
 
    public void encerrarEmprestimo(){
        return;
+   }
+
+   public void getExemplarDisponivel(Livro livro){
+
+
    }
 
    private int getEmprestimosAtrasados(int codUsuario){
@@ -83,7 +88,6 @@ public class EmprestimoController {
     public void encerrarReserva(Livro livro, Usuario usuario) {
         reservas.removeIf(reserva -> reserva.getUsuario().getCodigo() == usuario.getCodigo() && reserva.getLivro().getCodigo() == livro.getCodigo());
     }
-
 
     public boolean temReserva(Livro livro, Usuario usuario) {
         for (Reserva reserva : reservas) {
