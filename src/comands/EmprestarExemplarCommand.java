@@ -9,8 +9,8 @@ import src.model.Usuario;
 import src.controller.BibliotecaController;
 import src.controller.EmprestimoController;
 import src.controller.UsuarioController;
-import view.Display;
-import src.di.DependencyInjector;
+import src.view.Display;
+
 
 
 public class EmprestarExemplarCommand {

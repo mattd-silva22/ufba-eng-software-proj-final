@@ -7,14 +7,14 @@ import src.di.DependencyInjector;
 import src.model.Emprestimo;
 import src.model.Reserva;
 import src.model.Usuario;
-
+import src.view.Display;
 import java.util.ArrayList;
 
 public class HistoricoUsuarioCommand {
     UsuarioController usuarioController = DependencyInjector.getUsuarioController();
 
     EmprestimoController emprestimoController = DependencyInjector.getEmprestimoController();
-    view.Display display = DependencyInjector.getDisplay();
+    Display display = DependencyInjector.getDisplay();
 
     public void execute(int codUsuario) {
         Usuario usuario = usuarioController.buscarUsuarioPorCod(codUsuario);

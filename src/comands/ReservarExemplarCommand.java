@@ -8,12 +8,13 @@ import src.model.Exemplar;
 import src.model.Livro;
 import src.model.Reserva;
 import src.model.Usuario;
+import src.view.Display;
 
 public class ReservarExemplarCommand  {
     UsuarioController usuarioController = DependencyInjector.getUsuarioController();
     BibliotecaController bibliotecaController = DependencyInjector.getBibliotecaController();
     EmprestimoController emprestimoController = DependencyInjector.getEmprestimoController();
-    view.Display display = DependencyInjector.getDisplay();
+    Display display = DependencyInjector.getDisplay();
 
 
     public void execute(int codUsuario , int codLivro){ {

@@ -5,7 +5,7 @@ import src.comands.*;
 import src.controller.BibliotecaController;
 import src.controller.EmprestimoController;
 import src.model.*;
-import view.Display;
+import src.view.Display;
 import src.controller.UsuarioController;
 
 public class Sistema {

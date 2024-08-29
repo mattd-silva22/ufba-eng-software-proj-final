@@ -8,6 +8,7 @@ import src.di.DependencyInjector;
 import src.model.Emprestimo;
 import src.model.Livro;
 import src.model.Reserva;
+import src.view.Display;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public class InfoReservaCommand {
     UsuarioController usuarioController = DependencyInjector.getUsuarioController();
     EmprestimoController emprestimoController = DependencyInjector.getEmprestimoController();
     BibliotecaController bibliotecaController = DependencyInjector.getBibliotecaController();
-    view.Display display = DependencyInjector.getDisplay();
+    Display display = DependencyInjector.getDisplay();
 
    public void execute(int codLivro){
        Livro livro = bibliotecaController.buscarLivroPorCod(codLivro);
