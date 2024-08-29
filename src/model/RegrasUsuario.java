@@ -37,4 +37,6 @@ public class RegrasUsuario {
                 throw new IllegalArgumentException("Tipo de usuário desconhecido: " + tipo);
         }
     }
+
+
 }

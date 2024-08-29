@@ -5,6 +5,11 @@ public class Exemplar {
     private Livro livro;
     private StatusExemplar status;
 
+    public Exemplar(int codigo, Livro livro, StatusExemplar status) {
+        this.codigo = codigo;
+        this.livro = livro;
+        this.status = status;
+    }
 
 
     public int getCodigo() {

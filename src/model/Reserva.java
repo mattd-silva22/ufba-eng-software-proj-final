@@ -1,20 +1,28 @@
 package src.model;
 
-public class Reserva {
-   private Livro livro;
-   private Usuario usuario;
+import java.time.LocalDate;
 
-    public Reserva(Livro livro, Usuario usuario) {
-         this.livro = livro;
+public class Reserva {
+   private Exemplar exemplar;
+   private Usuario usuario;
+   private LocalDate dataReserva;
+
+    public Reserva(Exemplar exemplar, Usuario usuario) {
+         this.exemplar = exemplar;
          this.usuario = usuario;
+         this.dataReserva = LocalDate.now();
     }
 
-    public Livro getLivro() {
-         return livro;
+    public Exemplar getExemplar() {
+         return exemplar;
     }
 
     public Usuario getUsuario() {
          return usuario;
+    }
+
+    public LocalDate getDataReserva() {
+         return dataReserva;
     }
 
 }

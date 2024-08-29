@@ -1,22 +1,24 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import src.comands.*;
 import src.controller.BibliotecaController;
 import src.controller.EmprestimoController;
-import src.model.Emprestimo;
-import src.model.Exemplar;
-import src.model.Livro;
-import src.model.Usuario;
+import src.model.*;
 import view.Display;
 import src.controller.UsuarioController;
 
 public class Sistema {
     private static Display display = new Display();
     private static Scanner scanner = new Scanner(System.in);
-    private static UsuarioController usuarioController = new UsuarioController();
-    private static BibliotecaController bibliotecaController = new BibliotecaController();
-    private static EmprestimoController emprestimoController = new EmprestimoController();
 
 
+    private static EmprestarExemplarCommand emprestarExemplarCommand = new EmprestarExemplarCommand();
+    private static HistoricoUsuarioCommand historicoUsuarioCommand = new HistoricoUsuarioCommand();
+    private static ReservarExemplarCommand reservarExemplarCommand = new ReservarExemplarCommand();
+    private static DevolverExemplarCommand devolverExemplarCommand = new DevolverExemplarCommand();
+    private static ExibirExemplaresCommand exibirExemplaresCommand = new ExibirExemplaresCommand();
+    private static InfoReservaCommand infoReservaCommand = new InfoReservaCommand();
     private static String[] lerComando(){
         String comando = scanner.nextLine();
         return comando.split(" ");
@@ -26,87 +28,41 @@ public class Sistema {
         String acao = partes[0];
         switch (acao){
             case "emp": //emprestar
-                emprestarLivro(Integer.parseInt(partes[1]), Integer.parseInt(partes[2]));
+                emprestarExemplarCommand.execute(Integer.parseInt(partes[1]), Integer.parseInt(partes[2]));
                 break;
             case "res": //reservar
-                reservarLivro(Integer.parseInt(partes[1]), Integer.parseInt(partes[2]));
+                reservarExemplarCommand.execute(Integer.parseInt(partes[1]), Integer.parseInt(partes[2]));
                 break;
             case "dev": //devolver
+                devolverExemplarCommand.execute(Integer.parseInt(partes[1]), Integer.parseInt(partes[2]));
                 break;
             case "obs": //observar
                 break;
-            case "liv": //consultar
+            case "usu": //historico
+                historicoUsuarioCommand.execute(Integer.parseInt(partes[1]));
                 break;
-            case "sair":
+            case "liv": //consultar
+                infoReservaCommand.execute(Integer.parseInt(partes[1]));
+                break;
+            case "exemp"://exemplar
+                exibirExemplaresCommand.execute();
+                break;
+            case "sai":
                 System.exit(0);
                 break;
             default:
-                display.exibirMensagem("Comando inválido");
+                display.exibirMensagem("Comando inválido" , "Error");
         }
     }
 
-    private static void emprestarLivro(int codUsuario, int codLivro){
-
-        Usuario usuario = usuarioController.buscarUsuarioPorCod(codUsuario);
-        Livro livro = bibliotecaController.buscarLivroPorCod(codLivro);
-
-        if(usuario == null){
-            display.exibirMensagem("Usuário não encontrado");
-            return;
-        }
-        if(livro == null){
-            display.exibirMensagem("Livro não encontrado");
-            return;
-        }
-        if(emprestimoController.temEmprestimoAtivoParaLivro(codUsuario, codLivro)){
-            display.exibirMensagem("Usuário já possui empréstimo ativo para este livro");
-            return;
-        }
-
-        if(emprestimoController.usuarioApitoParaEmprestimo(usuario)){
-            display.exibirMensagem("Usuário não pode realizar empréstimo");
-            return;
-        }
-
-        if(!bibliotecaController.temExemplarDisponivel(codLivro)){
-            display.exibirMensagem("Não há exemplares disponíveis para empréstimo");
-            return;
-        }
-
-        Exemplar exemplar = bibliotecaController.getExemplarDisponivel(livro);
-
-        if(exemplar == null){
-            display.exibirMensagem("Exemplar não encontrado");
-            return;
-        }
-
-        Emprestimo emprestimo = new Emprestimo(exemplar, usuario);
-        emprestimoController.adicionarEmprestimo(emprestimo);
-        display.exibirMensagem("Empréstimo realizado com sucesso");
-        display.exibirEmprestimoSucesso(usuario, livro);
-    }
-
-    private static void reservarLivro(int codUsuario, int codLivro){
-        Usuario usuario = usuarioController.buscarUsuarioPorCod(codUsuario);
-        Livro livro = bibliotecaController.buscarLivroPorCod(codLivro);
-        if(usuario == null){
-            display.exibirMensagem("Usuário não encontrado");
-            return;
-        }
-        if(livro == null){
-            display.exibirMensagem("Livro não encontrado");
-            return;
-        }
-        if(emprestimoController.temEmprestimoAtivoParaLivro(codUsuario, codLivro)){
-            display.exibirMensagem("Usuário já possui empréstimo ativo para este livro");
-            return;
-        }
-    }
 
    public static void main(String[] args){
-        display.menuPrincipal();
-        String[] partes = lerComando();
-        execultaComando(partes);
+        while(true){
+            display.menuPrincipal();
+            String[] partes = lerComando();
+            execultaComando(partes);
+        }
+
 
 
    }
