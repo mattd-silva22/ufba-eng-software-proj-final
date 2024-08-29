@@ -38,6 +38,8 @@ public class Sistema {
                 break;
             case "obs": //observar
                 break;
+            case "nth": //notificacoes
+                break;
             case "usu": //historico
                 historicoUsuarioCommand.execute(Integer.parseInt(partes[1]));
                 break;

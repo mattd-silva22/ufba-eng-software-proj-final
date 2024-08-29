@@ -25,8 +25,6 @@ public class Display {
         System.out.println("Ano: " + livro.getAnoPublicacao());
         System.out.println("Editora: " + livro.getEditora());
         System.out.println("Edicao: " + livro.getEdicao());
-        
-
     }
 
     public void exibirReserva(Reserva reserva){

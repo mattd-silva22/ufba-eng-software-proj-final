@@ -44,7 +44,7 @@ public class BibliotecaController {
 
     public boolean temExemplarDisponivel(int codLivro){
         for (Exemplar exemplar : exemplares) {
-            if (exemplar.getLivro().getCodigo() == codLivro && exemplar.getStatus().equals(StatusExemplar.DISPONIVEL)) {
+            if (exemplar.getLivro().getCodigo() == codLivro && exemplar.disponivelParaEmprestimo()) {
                 return true;
             }
         }
@@ -53,7 +53,7 @@ public class BibliotecaController {
 
     public Exemplar getExemplarDisponivel(Livro livro){
         for (Exemplar exemplar : exemplares) {
-            if (exemplar.getLivro().equals(livro) && exemplar.getStatus().equals(StatusExemplar.DISPONIVEL)) {
+            if (exemplar.getLivro().equals(livro) && exemplar.disponivelParaEmprestimo()) {
                 return exemplar;
             }
         }
@@ -63,7 +63,7 @@ public class BibliotecaController {
     public void reservarExemplar(Exemplar exemplar) {
         for (Exemplar ex : exemplares) {
             if (ex.getCodigo() == exemplar.getCodigo()) {
-                ex.setStatus(StatusExemplar.RESERVADO);
+                ex.reservar();
             }
         }
     }
@@ -71,7 +71,7 @@ public class BibliotecaController {
     public void devolverExemplar(Exemplar exemplar){
         for (Exemplar ex : exemplares) {
             if (ex.getCodigo() == exemplar.getCodigo()) {
-                ex.setStatus(StatusExemplar.DISPONIVEL);
+                ex.devolver();
             }
         }
     }
@@ -79,7 +79,7 @@ public class BibliotecaController {
     public void emprestarExemplar(Exemplar exemplar){
             for (Exemplar ex : exemplares) {
                 if (ex.getCodigo() == exemplar.getCodigo()) {
-                    ex.setStatus(StatusExemplar.EMPRESTADO);
+                    ex.emprestar();
                 }
             }
         }

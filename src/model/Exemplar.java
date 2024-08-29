@@ -27,4 +27,21 @@ public class Exemplar {
     public void setStatus(StatusExemplar status) {
         this.status = status;
     }
+
+    public void emprestar() {
+        this.status = StatusExemplar.EMPRESTADO;
+    }
+
+    public void devolver() {
+        this.status = StatusExemplar.DISPONIVEL;
+    }
+
+    public void reservar() {
+        this.status = StatusExemplar.RESERVADO;
+    }
+
+    public boolean disponivelParaEmprestimo() {
+        return this.status == StatusExemplar.DISPONIVEL;
+    }
+
 }
